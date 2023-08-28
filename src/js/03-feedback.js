@@ -27,8 +27,11 @@ function onButtonClick(e) {
     email: email.value,
   };
   e.preventDefault();
+  if (email.value === '' && message.value === '') {
+    return;
+  }
   console.log(array);
-  localStorage.clear('feedback-form-state');
+  localStorage.removeItem('feedback-form-state');
   email.value = '';
   message.value = '';
 }
