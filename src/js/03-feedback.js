@@ -2,6 +2,13 @@ import throttle from 'lodash.throttle';
 const form = document.querySelector('.feedback-form');
 const { email, message } = form.elements;
 
+const newArray = localStorage.getItem('feedback-form-state');
+const parce = JSON.parse(newArray);
+if (parce) {
+  email.value = parce.email;
+  message.value = parce.message;
+}
+
 form.addEventListener('input', throttle(onInputFormAddValue, 500));
 
 function onInputFormAddValue() {
@@ -11,16 +18,8 @@ function onInputFormAddValue() {
   };
   localStorage.setItem('feedback-form-state', JSON.stringify(array));
 }
-const newArray = localStorage.getItem('feedback-form-state');
-const parce = JSON.parse(newArray);
-if (parce === null) {
-  return;
-} else {
-  email.value = parce.email;
-  message.value = parce.message;
-}
-
 form.addEventListener('submit', onButtonClick);
+
 function onButtonClick(e) {
   const array = {
     message: message.value,
