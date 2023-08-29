@@ -26,7 +26,7 @@ function onButtonClick(e) {
     email: email.value,
   };
   e.preventDefault();
-  if (email.value === '' && message.value === '') {
+  if (email.value === '' || message.value === '') {
     return;
   }
   console.log(array);
